@@ -1,4 +1,4 @@
-//Mozart JS v1.0 
+//Mozart JS v1.1
 //Shorthand for element retrieval, creation, insertion, and removal. 
 
 //retrieve element(s)
@@ -25,17 +25,59 @@ function $make(t, p) {
     return o;
 }
 
-//insert element before target
+//insert element before target(s)
 function $addBefore(e, t) {
-    t.parentNode.insertBefore(e, t);
+    if (typeof t === 'string' || t instanceof String) {
+        if (t.startsWith('#')) {            
+            $get(t).parentNode.insertBefore(e, $get(t));
+        } else {
+            var arr = $get(t);
+            for (var i in arr) {
+                var f = e.cloneNode(true);
+                arr[i].parentNode.insertBefore(f, arr[i]);
+            } 
+        }
+    } else {
+        t.parentNode.insertBefore(e, t);
+    }        
 }
 
-//insert element after target
+//insert element after target(s)
 function $addAfter(e, t) {
-    t.parentNode.insertBefore(e, t.nextSibling);
+    if (typeof t === 'string' || t instanceof String) {
+        if (t.startsWith('#')) {
+            $get(t).parentNode.insertBefore(e, $get(t).nextSibling);
+        } else {
+
+            var arr = $get(t);
+            for (var i in arr) {
+                var f = e.cloneNode(true);
+                arr[i].parentNode.insertBefore(f, arr[i].nextSibling);
+            } 
+
+        }
+    } else {
+        t.parentNode.insertBefore(e, t.nextSibling);
+    }
 }
 
-//remove element
+//remove element(s)
 function $remove(e) {
-    e.parentNode.removeChild(e);
+    if (typeof e === 'string' || e instanceof String) {
+        if (e.startsWith('#')) {
+            $get(e).parentNode.removeChild($get(e));
+        } else {
+            var arr = $get(e);
+            for (var i in arr) {                
+                arr[i].parentNode.removeChild(arr[i]);
+            }            
+        }
+    } else {
+        e.parentNode.removeChild(e);
+    }
 }
+
+//execute when the DOM is ready
+var $domReady = function(callback) {
+    document.readyState === "interactive" || document.readyState === "complete" ? callback() : document.addEventListener("DOMContentLoaded", callback);
+};
