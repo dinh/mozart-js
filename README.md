@@ -1,5 +1,5 @@
 # mozart-js
-Lightweight library that adds shorthand for element retrieval, creation, insertion, and removal without the unncessary bulk of jQuery.
+Lightweight library that adds shorthand for element retrieval, creation, insertion, and removal without the bulk of jQuery.
 
 **Element Retrieval**
 
