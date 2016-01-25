@@ -77,7 +77,7 @@ function $remove(e) {
     }
 }
 
-//on when the document is ready
+//execute when the DOM is ready
 var $domReady = function(callback) {
     document.readyState === "interactive" || document.readyState === "complete" ? callback() : document.addEventListener("DOMContentLoaded", callback);
 };
