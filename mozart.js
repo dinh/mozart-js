@@ -31,9 +31,10 @@ function $addBefore(e, t) {
         if (t.startsWith('#')) {            
             $get(t).parentNode.insertBefore(e, $get(t));
         } else {
-            $get(t).forEach(function () {
-                this.parentNode.insertBefore(e, this);
-            });
+            var arr = $get(t);
+            for (var i in arr) {
+                arr[i].parentNode.insertBefore(e, arr[i]);
+            } 
         }
     } else {
         t.parentNode.insertBefore(e, t);
@@ -46,9 +47,12 @@ function $addAfter(e, t) {
         if (t.startsWith('#')) {
             $get(t).parentNode.insertBefore(e, $get(t).nextSibling);
         } else {
-            $get(t).forEach(function () {
-                this.parentNode.insertBefore(e, this.nextSibling);
-            });
+
+            var arr = $get(t);
+            for (var i in arr) {
+                arr[i].parentNode.insertBefore(e, arr[i].nextSibling);
+            } 
+
         }
     } else {
         t.parentNode.insertBefore(e, t.nextSibling);
@@ -61,9 +65,10 @@ function $remove(e) {
         if (e.startsWith('#')) {
             $get(e).parentNode.removeChild($get(e));
         } else {
-            $get(e).forEach(function () {
-                this.parentNode.removeChild(e);
-            });
+            var arr = $get(e);
+            for (var i in arr) {
+                arr[i].parentNode.removeChild(arr[i]);
+            }            
         }
     } else {
         e.parentNode.removeChild(e);
