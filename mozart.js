@@ -1,4 +1,3 @@
-//--------------FUNCTIONS--------------
 //Mozart JS v1.1
 //Shorthand for element retrieval, creation, insertion, and removal. 
 
