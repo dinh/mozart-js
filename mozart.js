@@ -68,17 +68,17 @@ function $addAfter(e, t) {
 function $remove(e, t) {
     if (void 0 === t) t = document; //if t is undefined, search the document
     if (typeof t !== 'string' && !(t instanceof String)) { // if t is an element, process normally
-        if (typeof e === 'string' || e instanceof String) { // if e is mozart syntax, parse it
+        if (typeof e !== 'string' || !(e instanceof String)) { // if e is an element, process it normally
+            e.parentNode.removeChild(e);
+        } else { //if e is Mozart syntax, process it
             if (e.startsWith('#')) {
                 $get(e, t).parentNode.removeChild($get(e, t));
             } else {
                 var arr = $get(e, t);
                 for (var i in arr) {                
                     arr[i].parentNode.removeChild(arr[i]);
-                }            
+                }
             }
-        } else { // if e is an element, process it normally
-            e.parentNode.removeChild(e);
         }
     } else { //if t is Mozart syntax, parse it and run $remove with the parsed data
         if (t.startsWith('#')) {
