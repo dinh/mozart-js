@@ -76,8 +76,3 @@ function $remove(e) {
         e.parentNode.removeChild(e);
     }
 }
-
-//execute when the DOM is ready
-var $domReady = function(callback) {
-    document.readyState === "interactive" || document.readyState === "complete" ? callback() : document.addEventListener("DOMContentLoaded", callback);
-};
