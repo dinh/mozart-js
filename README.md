@@ -1,7 +1,5 @@
 # mozart-js
-Lightweight library that adds shorthand for element retrieval, creation, insertion, and removal.
-
-*TODO: modify insertion and removal functions to take common syntax without using* `$get`
+Lightweight library that adds shorthand for element retrieval, creation, insertion, and removal without the unncessary bulk of jQuery.
 
 **Element Retrieval**
 
