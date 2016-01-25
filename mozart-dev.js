@@ -1,4 +1,4 @@
-//Mozart JS v1.0 
+//Mozart JS v1.1
 //Shorthand for element retrieval, creation, insertion, and removal. 
 
 //retrieve element(s)
@@ -33,7 +33,8 @@ function $addBefore(e, t) {
         } else {
             var arr = $get(t);
             for (var i in arr) {
-                arr[i].parentNode.insertBefore(e, arr[i]);
+                var f = e.cloneNode(true);
+                arr[i].parentNode.insertBefore(f, arr[i]);
             } 
         }
     } else {
@@ -50,7 +51,8 @@ function $addAfter(e, t) {
 
             var arr = $get(t);
             for (var i in arr) {
-                arr[i].parentNode.insertBefore(e, arr[i].nextSibling);
+                var f = e.cloneNode(true);
+                arr[i].parentNode.insertBefore(f, arr[i].nextSibling);
             } 
 
         }
@@ -66,7 +68,7 @@ function $remove(e) {
             $get(e).parentNode.removeChild($get(e));
         } else {
             var arr = $get(e);
-            for (var i in arr) {
+            for (var i in arr) {                
                 arr[i].parentNode.removeChild(arr[i]);
             }            
         }
@@ -74,3 +76,8 @@ function $remove(e) {
         e.parentNode.removeChild(e);
     }
 }
+
+//on when the document is ready
+var $domReady = function(callback) {
+    document.readyState === "interactive" || document.readyState === "complete" ? callback() : document.addEventListener("DOMContentLoaded", callback);
+};
