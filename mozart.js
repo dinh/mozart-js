@@ -25,17 +25,47 @@ function $make(t, p) {
     return o;
 }
 
-//insert element before target
+//insert element before target(s)
 function $addBefore(e, t) {
-    t.parentNode.insertBefore(e, t);
+    if (typeof t === 'string' || t instanceof String) {
+        if (t.startsWith('#')) {            
+            $get(t).parentNode.insertBefore(e, $get(t));
+        } else {
+            $get(t).forEach(function () {
+                this.parentNode.insertBefore(e, this);
+            });
+        }
+    } else {
+        t.parentNode.insertBefore(e, t);
+    }        
 }
 
-//insert element after target
+//insert element after target(s)
 function $addAfter(e, t) {
-    t.parentNode.insertBefore(e, t.nextSibling);
+    if (typeof t === 'string' || t instanceof String) {
+        if (t.startsWith('#')) {
+            $get(t).parentNode.insertBefore(e, $get(t).nextSibling);
+        } else {
+            $get(t).forEach(function () {
+                this.parentNode.insertBefore(e, this.nextSibling);
+            });
+        }
+    } else {
+        t.parentNode.insertBefore(e, t.nextSibling);
+    }
 }
 
-//remove element
+//remove element(s)
 function $remove(e) {
-    e.parentNode.removeChild(e);
+    if (typeof e === 'string' || e instanceof String) {
+        if (e.startsWith('#')) {
+            $get(e).parentNode.removeChild($get(e));
+        } else {
+            $get(e).forEach(function () {
+                this.parentNode.removeChild(e);
+            });
+        }
+    } else {
+        e.parentNode.removeChild(e);
+    }
 }
