@@ -2,12 +2,12 @@
 //Shorthand for element retrieval, creation, insertion, and removal. 
 
 //retrieve element(s)
-function $get(i, t) {
+function $get(e, t) {
     if (void 0 === t) t = document;
-    if (i.startsWith('#')) return t.getElementById(i.substring(1));
-    if (i.startsWith('.')) return t.getElementsByClassName(i.substring(1));
-    if (i.startsWith('-')) return t.getElementsByName(i.substring(1));
-    return t.getElementsByTagName(i);
+    if (e.startsWith('#')) return t.getElementById(e.substring(1));
+    if (e.startsWith('.')) return t.getElementsByClassName(e.substring(1));
+    if (e.startsWith('-')) return t.getElementsByName(e.substring(1));
+    return t.getElementsByTagName(e);
 }
 
 //create element
@@ -24,6 +24,7 @@ function $make(t, p) {
     });
     return o;
 }
+
 
 //insert element before target(s)
 function $addBefore(e, t) {
@@ -42,13 +43,14 @@ function $addBefore(e, t) {
     }        
 }
 
+
+
 //insert element after target(s)
 function $addAfter(e, t) {
     if (typeof t === 'string' || t instanceof String) {
         if (t.startsWith('#')) {
             $get(t).parentNode.insertBefore(e, $get(t).nextSibling);
         } else {
-
             var arr = $get(t);
             for (var i in arr) {
                 var f = e.cloneNode(true);
@@ -61,18 +63,31 @@ function $addAfter(e, t) {
     }
 }
 
+
 //remove element(s)
-function $remove(e) {
-    if (typeof e === 'string' || e instanceof String) {
-        if (e.startsWith('#')) {
-            $get(e).parentNode.removeChild($get(e));
-        } else {
-            var arr = $get(e);
-            for (var i in arr) {                
-                arr[i].parentNode.removeChild(arr[i]);
-            }            
+function $remove(e, t) {
+    if (void 0 === t) t = document; //if t is undefined, search the document
+    if (typeof t !== 'string' && !(t instanceof String)) { // if t is an element, process normally
+        if (typeof e === 'string' || e instanceof String) { // if e is mozart syntax, parse it
+            if (e.startsWith('#')) {
+                $get(e, t).parentNode.removeChild($get(e, t));
+            } else {
+                var arr = $get(e, t);
+                for (var i in arr) {                
+                    arr[i].parentNode.removeChild(arr[i]);
+                }            
+            }
+        } else { // if e is an element, process it normally
+            e.parentNode.removeChild(e);
         }
-    } else {
-        e.parentNode.removeChild(e);
+    } else { //if t is Mozart syntax, parse it and run $remove with the parsed data
+        if (t.startsWith('#')) {
+            $remove(e, $get(t));
+        } else {
+            var arr = $get(t);
+            for (var i in arr) {
+                $remove(e, arr[i]);
+            }
+        }
     }
 }
