@@ -36,8 +36,8 @@ To set an attribute, add it to an object literal in the second parameter. Though
 var g = $make('button', {
     'style':'float: left',
     'class':'myClass',
-    'text': 'Some text here',
-    'value': 'Some value here'
+    'text':'Some text here',
+    'value':'Some value here'
 });
 
 //Equivalent to:
@@ -64,7 +64,7 @@ targetElement.parentNode.insertBefore(newElement, document.getElementById('someE
 ```
 Like jQuery, you can clone an element and add it multiple times with the common syntax:
 ```javascript
-var foo = $make('div', {'text': 'This is a test'});
+var foo = $make('div', {'text':'This is a test'});
 $addBefore(foo, '.myClass');
 ```
 **Element Removal**
