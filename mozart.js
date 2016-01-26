@@ -24,27 +24,23 @@ function $make(tag, params) {
 
 //sibling insertion before
 function $addBefore(input, target) {
-    var newElms = $set(input);
+    var newElm = $set(input)[0];
     var oldElms = $set(target);
     for (var i = 0; i < oldElms.length; i++) {
         var oldElm = oldElms[i];
-        for (var j = 0; j < newElms.length; j++) {
-            var newElm = newElms[j].cloneNode(true);
-            oldElm.parentNode.insertBefore(newElm, oldElm);
-        }
+        var clone = newElm.cloneNode(true);
+        oldElm.parentNode.insertBefore(clone, oldElm);
     }
 }
 
-//sibling insertion after
-function $addAfter(input, target) {
-    var newElms = $set(input);
+//sibling insertion before
+function $addBefore(input, target) {
+    var newElm = $set(input)[0];
     var oldElms = $set(target);
     for (var i = 0; i < oldElms.length; i++) {
         var oldElm = oldElms[i];
-        for (var j = 0; j < newElms.length; j++) {
-            var newElm = newElms[j].cloneNode(true);
-            oldElm.parentNode.insertBefore(newElm, oldElm.nextSibling);
-        }
+        var clone = newElm.cloneNode(true);
+        oldElm.parentNode.insertBefore(clone, oldElm.nextSibling);
     }
 }
 
