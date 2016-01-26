@@ -18,12 +18,13 @@ var c = document.querySelectorAll('div');
 ```
 
 To pull only a single element, use `$grab` instead:
-
+```javascript
 var a = $grab('#myId');
 
 //Equivalent to:
 
 var a = document.querySelector('#myId');
+```
 
 **Element Creation**
 
