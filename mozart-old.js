@@ -1,4 +1,4 @@
-//Mozart JS v1.1
+//Mozart JS v0.9
 //Shorthand for element retrieval, creation, insertion, and removal. 
 
 //retrieve element(s)
