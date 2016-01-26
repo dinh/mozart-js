@@ -5,6 +5,9 @@
 function $get(input) {
     return document.querySelectorAll(input);
 }
+function $grab(input) {
+    return document.querySelector(input);
+}
 
 //element creation
 function $make(tag, params) {
