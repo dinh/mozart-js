@@ -3,7 +3,7 @@ Lightweight library that adds shorthand for element retrieval, creation, inserti
 
 **Element Retrieval**
 
-Mozart operates on CSS selectors by invoking `document.querySelectorAll()`:
+Mozart operates on CSS selectors. To pull an HTMLCollection, use `$get`:
 
 ```javascript
 var a = $get('#myId');
@@ -16,6 +16,15 @@ var a = document.querySelectorAll('#myId');
 var b = document.querySelectorAll('.myClass');
 var c = document.querySelectorAll('div');
 ```
+
+To pull only a single element, use `$grab` instead:
+
+var a = $grab('#myId');
+
+//Equivalent to:
+
+var a = document.querySelector('#myId');
+
 **Element Creation**
 
 To create an element, specify the tag name:
