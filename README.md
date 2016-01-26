@@ -72,15 +72,4 @@ To remove an element from the DOM, call the `$remove` function with the common s
 ```javascript
 $remove('#myId');
 $remove('.myClass');
-
-//Equivalent to:
-
-var rem = document.getElementById('myId');
-rem.parentNode.remove(rem);
-for (var i in document.getElementsByClassName(myClass)) {
-    var elm = document.getElementsByClassName(myClass)[i];
-    elm.parentNode.remove(elm);
-}
-
-
 ```
