@@ -1,5 +1,5 @@
 //Mozart JS v1.2
-//Shorthand for element manipulation.
+//Shorthand for element lookup/creation/insertion/removal.
 
 //element retrieval
 function $get(input) {
