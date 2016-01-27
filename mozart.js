@@ -26,19 +26,29 @@ function $make(tag, params) {
 function $addBefore(input, target) {
     var newElm = $set(input)[0];
     var oldElms = $set(target);
-    for (var i = 0; i < oldElms.length; i++) {
-        var oldElm = oldElms[i];
-        oldElm.parentNode.insertBefore(newElm, oldElm);
+    if (oldElms[0]) {
+        var firstTarget = oldElms[0];
+        firstTarget.parentNode.insertBefore(newElm, firstTarget);
+        for (var i = 1; i < oldElms.length; i++) {
+            var oldElm = oldElms[i];
+            var clone = newElm.cloneNode(true);
+            oldElm.parentNode.insertBefore(clone, oldElm);
+        }
     }
 }
 
-//sibling insertion before
-function $addBefore(input, target) {
+//sibling insertion after
+function $addAfter(input, target) {
     var newElm = $set(input)[0];
     var oldElms = $set(target);
-    for (var i = 0; i < oldElms.length; i++) {
-        var oldElm = oldElms[i];
-        oldElm.parentNode.insertBefore(newElm, oldElm.nextSibling);
+    if (oldElms[0]) {
+        var firstTarget = oldElms[0];
+        firstTarget.parentNode.insertBefore(newElm, firstTarget.nextSibling);
+        for (var i = 1; i < oldElms.length; i++) {
+            var oldElm = oldElms[i];
+            var clone = newElm.cloneNode(true);
+            oldElm.parentNode.insertBefore(clone, oldElm.nextSibling);
+        }
     }
 }
 
