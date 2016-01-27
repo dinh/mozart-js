@@ -28,8 +28,7 @@ function $addBefore(input, target) {
     var oldElms = $set(target);
     for (var i = 0; i < oldElms.length; i++) {
         var oldElm = oldElms[i];
-        var clone = newElm.cloneNode(true);
-        oldElm.parentNode.insertBefore(clone, oldElm);
+        oldElm.parentNode.insertBefore(newElm, oldElm);
     }
 }
 
@@ -39,8 +38,7 @@ function $addBefore(input, target) {
     var oldElms = $set(target);
     for (var i = 0; i < oldElms.length; i++) {
         var oldElm = oldElms[i];
-        var clone = newElm.cloneNode(true);
-        oldElm.parentNode.insertBefore(clone, oldElm.nextSibling);
+        oldElm.parentNode.insertBefore(newElm, oldElm.nextSibling);
     }
 }
 
