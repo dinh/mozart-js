@@ -28,11 +28,11 @@ function $addBefore(input, target) {
     var oldElms = $set(target);
     if (oldElms[0]) {
         var firstTarget = oldElms[0];
-        firstTarget.parentNode.insertBefore(newElm, firstTarget);
+        firstTarget.parentElement.insertBefore(newElm, firstTarget);
         for (var i = 1; i < oldElms.length; i++) {
             var oldElm = oldElms[i];
             var clone = newElm.cloneNode(true);
-            oldElm.parentNode.insertBefore(clone, oldElm);
+            oldElm.parentElement.insertBefore(clone, oldElm);
         }
     }
 }
@@ -43,11 +43,11 @@ function $addAfter(input, target) {
     var oldElms = $set(target);
     if (oldElms[0]) {
         var firstTarget = oldElms[0];
-        firstTarget.parentNode.insertBefore(newElm, firstTarget.nextSibling);
+        firstTarget.parentElement.insertBefore(newElm, firstTarget.nextSibling);
         for (var i = 1; i < oldElms.length; i++) {
             var oldElm = oldElms[i];
             var clone = newElm.cloneNode(true);
-            oldElm.parentNode.insertBefore(clone, oldElm.nextSibling);
+            oldElm.parentElement.insertBefore(clone, oldElm.nextSibling);
         }
     }
 }
