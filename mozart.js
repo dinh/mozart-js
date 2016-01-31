@@ -3,7 +3,7 @@
 
 //element retrieval
 function $get(input) {
-    return document.querySelectorAll(input);
+    return Array.prototype.slice.call(document.querySelectorAll(input));
 }
 function $grab(input) {
     return document.querySelector(input);
