@@ -1,5 +1,6 @@
 //Mozart JS v1.2
 //Shorthand for element lookup/creation/insertion/removal.
+//https://github.com/C-Weinstein/mozart-js/
 
 //element retrieval
 function $get(input) {
