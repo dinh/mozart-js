@@ -19,11 +19,9 @@ function $addBefore(input, target) {
     var newElm = $set(input)[0];
     var oldElms = $set(target);
     if (oldElms[0]) {
-        var firstTarget = oldElms[0];
-        firstTarget.parentElement.insertBefore(newElm, firstTarget);
-        for (var i = 1; i < oldElms.length; i++) {
+        for (var i = 0; i < oldElms.length; i++) {
             var oldElm = oldElms[i];
-            var clone = newElm.cloneNode(true);
+            var clone = (i !== 0 ? newElm.cloneNode(true) : newElm);
             oldElm.parentElement.insertBefore(clone, oldElm);
         }
     }
@@ -33,17 +31,15 @@ function $addBefore(input, target) {
 function $addAfter(input, target) {
     var newElm = $set(input)[0];
     var oldElms = $set(target);
-    if (oldElms[0]) {
-        var firstTarget = oldElms[0];
-        firstTarget.parentElement.insertBefore(newElm, firstTarget.nextSibling);
-        for (var i = 1; i < oldElms.length; i++) {
+    if (oldElms[0]) {        
+        for (var i = 0; i < oldElms.length; i++) {
             var oldElm = oldElms[i];
-            var clone = newElm.cloneNode(true);
-            oldElm.parentElement.insertBefore(clone, oldElm.nextSibling);
+            var parent = oldElm.parentElement;
+            var clone = (i !== 0 ? newElm.cloneNode(true) : newElm);
+            oldElm.nextSibling ? parent.insertBefore(clone, oldElm.nextSibling) : parent.appendChild(clone);
         }
     }
 }
-
 
 //element removal
 function $remove(input) {
@@ -53,13 +49,8 @@ function $remove(input) {
 
 //turn something into a set
 function $set(input) {    
-    if (typeof input === 'string' || input instanceof String) {
-        return $get(input);
-    } else if (input.nodeType === 1 || input.nodeType === 3) {
-        return [input];
-    } else if (input[Symbol.iterator] !== undefined) {
-        return input;
-    } else {
-        throw new TypeError('Cannot convert ' + typeof input + ' to iterable');
-    }    
+    if (typeof input === 'string' || input instanceof String) return $get(input);
+    if (input.nodeType === 1 || input.nodeType === 3) return [input];
+    if (input[Symbol.iterator] !== undefined) return input;
+    throw new TypeError('Cannot convert ' + typeof input + ' to iterable');        
 }
