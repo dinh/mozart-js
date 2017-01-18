@@ -5,7 +5,7 @@
 //element retrieval
 function $get(input) {return $toArray(document.querySelectorAll(input));}
 function $grab(input) {return document.querySelector(input);}
-function $toArray(arrayLike){return Array.prototype.slice.call(arrayLike);}
+function $toArray(arrayLike) {return Array.prototype.slice.call(arrayLike);}
 
 //element creation
 function $make(tag, params) {
