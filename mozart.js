@@ -1,30 +1,16 @@
-//Mozart JS v1.2
+//Mozart JS v1.3
 //Shorthand for element lookup/creation/insertion/removal.
 //https://github.com/C-Weinstein/mozart-js/
 
 //element retrieval
-function $get(input) {
-    return $toArray(document.querySelectorAll(input));
-}
-function $grab(input) {
-    return document.querySelector(input);
-}
-
-function $toArray(arrayLike){
-  return Array.prototype.slice.call(arrayLike);
-}
-
+function $get(input) {return $toArray(document.querySelectorAll(input));}
+function $grab(input) {return document.querySelector(input);}
+function $toArray(arrayLike){return Array.prototype.slice.call(arrayLike);}
 
 //element creation
 function $make(tag, params) {
     var obj = document.createElement(tag);
-    for (var key in params) {
-        if (key === 'text') {
-            obj.textContent = params[key];
-        } else {
-            obj.setAttribute(key, params[key]);
-        }
-    }
+    for (var key in params) obj[key] === null || obj[key] === '' ? obj[key] = params[key] : obj.setAttribute(key, params[key]);   
     return obj;
 }
 
@@ -62,23 +48,18 @@ function $addAfter(input, target) {
 //element removal
 function $remove(input) {
     var rem = $set(input);
-    for (var i = 0; i < rem.length; i++) {
-        var elm = rem[i];
-        elm.parentElement.removeChild(elm);
-    }
+    for (var i = 0; i < rem.length; i++) rem[i].parentElement.removeChild(rem[i]);    
 }
 
 //turn something into a set
-function $set(input) {
-    var set;
+function $set(input) {    
     if (typeof input === 'string' || input instanceof String) {
-        set = $get(input);
+        return $get(input);
     } else if (input.nodeType === 1 || input.nodeType === 3) {
-        set = [input];
+        return [input];
     } else if (input[Symbol.iterator] !== undefined) {
-        set = input;
+        return input;
     } else {
         throw new TypeError('Cannot convert ' + typeof input + ' to iterable');
-    }
-    return set;
+    }    
 }
